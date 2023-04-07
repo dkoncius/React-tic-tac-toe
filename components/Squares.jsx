@@ -1,7 +1,7 @@
-export default function Square({handleClick, value, index, winner}) {
-    return (
-      <button className={winner ? 'square winner' : 'square'} onClick={() => handleClick(index)}>
-        <span className={value && 'active'}>{value}</span>
-      </button>
-    )
-  }
+export default function Square({ value, onSquareClick, className }) {
+  return (
+    <button className={className} onClick={onSquareClick}>
+      {value}
+    </button>
+  );
+}

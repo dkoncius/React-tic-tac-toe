@@ -1,14 +1,9 @@
-import { useState } from "react"
-import Board from "../components/Board"
+import { useState } from 'react';
+import { calculateWinner } from '../utils/calculateWinner';
+import Game from '../components/Game';
 
-function App() {
-
+export default function App() {
   return (
-    <div className="app">
-      <h1>Tic Tac Toe</h1>
-      <Board/>
-    </div>
+    <Game/>
   )
 }
-
-export default App

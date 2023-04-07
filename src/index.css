@@ -52,6 +52,22 @@ h3.winner {
   animation-delay: 0.3s;
 }
 
+.game {
+  display: flex;
+  align-items: center;
+}
+
+.game-info ol {
+  display: grid;
+  gap: 20px;
+  margin: 0;
+}
+
+.game-info ol button {
+  padding: 10px;
+  margin: auto;
+}
+
 @keyframes pulse {
   from {
     transform: scale(1.3);

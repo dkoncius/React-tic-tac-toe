@@ -1,41 +1,47 @@
-import './Board.css'
-import { useState } from 'react'
-import { calculateWinner } from '../utils/calculateWinner';
-import Square from './Squares';
+import { calculateWinner } from "../utils/calculateWinner";
+import Square from "./Squares";
+import "./Board.css";
 
-export default function Board() {
-  const [squares, setSquares] = useState(Array(9).fill(null))
-  const [nextX, setNextX] = useState(true)
+export default function Board({ xIsNext, squares, onPlay }) {
+  const winner = calculateWinner(squares);
 
-  const handleClick = (index) => {
-    if (squares[index] || calculateWinner(squares)) {
-        return 
+  function handleClick(i) {
+    if (winner || squares[i]) {
+      return;
     }
-    squares[index] = nextX ? 'X' : 'O'
-    setNextX(!nextX)
-    setSquares([...squares])
-    console.log(squares)
+
+    const nextSquares = squares.slice();
+    nextSquares[i] = xIsNext ? "X" : "O";
+    onPlay(nextSquares);
   }
 
-  // Declaring winner
-  const winner = calculateWinner(squares);
   let status;
   if (winner) {
-    status = "Winner: " + winner;
+    status = `Winner: ${winner.player}`;
   } else {
-    status = "Next player: " + (nextX ? "X" : "O");
+    status = `Next player: ${xIsNext ? "X" : "O"}`;
   }
-    
+
   return (
     <>
-     <h3 className={winner && 'winner'}>{status}</h3>
-     <div className="board">
-      {squares.map((value, index) => {
+      <h1>Tic Tac Toe</h1>
+      <h3 className="status">{status}</h3>
+      <div className="board">
+      {squares.map((square, index) => {
+        const isWinningSquare = winner && winner.line.includes(index);
+        const squareValue = isWinningSquare ? winner.player : square;
+        const squareClass = isWinningSquare ? "square-winning" : "square";
+
         return (
-          <Square handleClick={handleClick} value={value} key={index} index={index} winner={winner}/>
-        )
+          <Square
+            key={index}
+            value={squareValue}
+            className={squareClass}
+            onSquareClick={() => handleClick(index)}
+          />
+        );
       })}
-    </div>
+      </div>
     </>
-  )
+  );
 }
