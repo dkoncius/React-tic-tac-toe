@@ -66,6 +66,7 @@ span.active {
 
 .toggle-buttons button {
   background: transparent;
+  color: rgba(255, 255, 255, 0.87);
   border: 3px solid rgba(255, 255, 255, 0.87);
   font-size: 1.5em;
   padding: 0;
