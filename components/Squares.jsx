@@ -1,5 +1,5 @@
 export default function Square({ value, onSquareClick, className }) {
-  console.log(value)
+  // console.log(value)
   return (
     <button className={className} onClick={onSquareClick}>
       {value}

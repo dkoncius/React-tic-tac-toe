@@ -27,16 +27,18 @@ export default function Board({ xIsNext, squares, onPlay }) {
       <h1>Tic Tac Toe</h1>
       <h3 className="status">{status}</h3>
       <div className="board">
-   {squares.map((square, index) => {
+      {squares.map((square, index) => {
         const isWinningSquare = winner && winner.line.includes(index);
         const squareValue = isWinningSquare ? winner.player : square;
         const squareClass = isWinningSquare ? "square-winning" : "square";
 
+        // Render the square normally if it is a winning square or there is no winner yet
+        // Otherwise, render an empty square
         return (
           <Square
             key={index}
-            value={squareValue}
-            className={squareClass}
+            value={winner && !isWinningSquare ? null : squareValue}
+            className={winner && !isWinningSquare ? "square" : squareClass}
             onSquareClick={() => handleClick(index)}
           />
         );
