@@ -6,7 +6,6 @@ import "./Board.css";
 
 function randomInRange(min, max) {
   const random = Math.random() * (max - min) + min
-  console.log(random)
   return random
 }
 
@@ -41,11 +40,6 @@ export default function Board({ xIsNext, squares, onPlay }) {
     const nextSquares = squares.slice();
     nextSquares[i] = xIsNext ? "X" : "O";
     onPlay(nextSquares);
-
-    // const nextWinner = calculateWinner(nextSquares);
-    // if (nextWinner) {
-    //   confetti(confettiOptions);
-    // }
   }
 
   let status;
