@@ -12,7 +12,7 @@ function randomInRange(min, max) {
 const confettiOptions = {
   colors: ['#0fa', '#fff', '#000'],
   particleCount: randomInRange(50, 400),
-   angle: randomInRange(55, 125),
+  angle: randomInRange(55, 125),
   origin: { y: 0.6 }
 };
 
