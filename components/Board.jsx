@@ -1,9 +1,10 @@
 import { calculateWinner } from "../utils/calculateWinner";
 import Square from "./Squares";
 import "./Board.css";
+import { useMemo } from "react";
 
 export default function Board({ xIsNext, squares, onPlay }) {
-  const winner = calculateWinner(squares);
+  const winner = useMemo(() => calculateWinner(squares), [squares]);
 
   function handleClick(i) {
     if (winner || squares[i]) {
@@ -29,7 +30,7 @@ export default function Board({ xIsNext, squares, onPlay }) {
       <div className="board">
       {squares.map((square, index) => {
         const isWinningSquare = winner && winner.line.includes(index);
-        const squareValue = isWinningSquare ? winner.player : square;
+        const squareValue = winner && !isWinningSquare ? null : square;
         const squareClass = isWinningSquare ? "square-winning" : "square";
 
         // Render the square normally if it is a winning square or there is no winner yet
@@ -37,8 +38,8 @@ export default function Board({ xIsNext, squares, onPlay }) {
         return (
           <Square
             key={index}
-            value={winner && !isWinningSquare ? null : squareValue}
-            className={winner && !isWinningSquare ? "square" : squareClass}
+            value={squareValue}
+            className={squareClass}
             onSquareClick={() => handleClick(index)}
           />
         );
