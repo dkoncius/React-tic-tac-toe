@@ -80,6 +80,10 @@ span.active {
 }
 
 @media (max-width: 768px) {
+  :root {
+    color-scheme: light;
+  }
+
   .game-info {
     display: none;
   }
